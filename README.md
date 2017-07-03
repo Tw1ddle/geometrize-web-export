@@ -2,8 +2,8 @@
 
 Haxe code for exporting geometrized images to web formats. Part of [Geometrize](https://github.com/Tw1ddle/geometrize-lib), a tool for recreating images with geometric primitives.
 
-[![Geometrized Venetian Mask](https://github.com/Tw1ddle/geometrize-web-export/blob/master/screenshots/venetian_mask.jpg?raw=true "Geometrized Venetian Mask")](http://www.samcodes.co.uk/project/geometrize-lib/)
+[![Geometrized Venetian Mask](https://github.com/Tw1ddle/geometrize-web-export/blob/master/screenshots/venetian_mask.jpg?raw=true "Geometrized Venetian Mask")](https://github.com/Tw1ddle/geometrize-lib)
 
 ## Usage
 
-These web export templates aren't useful for much yet. They will work as part of a larger system for visualizing geometrized images data on webpages. Watch this space.
+This web export code isn't useful for much yet. It will eventually be used for visualizing geometrized images data on webpages. Watch this space.
