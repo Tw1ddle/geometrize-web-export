@@ -22,13 +22,15 @@ branches:
 
 # Build the code
 script:
-  - haxe GeometrizeWebExport.hxml release.hxml
+  - haxelib install closure
+  - haxelib install embed-js
+  - haxe GeometrizeWebExport.hxml backend_all.hxml
 
 # Deploy the test configuration using Travis builtin GitHub Pages support
 deploy:
   provider: pages
   skip_cleanup: true
-  local_dir: $TRAVIS_BUILD_DIR/test/
+  local_dir: $TRAVIS_BUILD_DIR/bin/
   github_token: $GITHUB_API_KEY
   on:
     branch: master

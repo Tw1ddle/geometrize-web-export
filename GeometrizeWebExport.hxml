@@ -1,4 +1,14 @@
 -main Main
 
+# Use Google Closure compiler to minify builds
+-lib closure
+-D closure_advanced
+-D closure_overwrite
+-D closure_language_in=ECMASCRIPT5
+-D closure_warning_level=DEFAULT
+
+# For embedding external js
+-lib embed-js
+
 # Enable full dead code elimination
 -dce full

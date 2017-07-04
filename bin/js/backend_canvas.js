@@ -1,0 +1,1 @@
+(function(){function d(){window.onload=e(this,this.f)}function e(c,b){if(null==b)return null;null==b.a&&(b.a=f++);var a;null==c.b?c.b={}:a=c.b[b.a];null==a&&(a=function(){return a.method.apply(a.scope,arguments)},a.scope=c,a.method=b,c.b[b.a]=a);return a}d.c=function(){new d};d.prototype={f:function(){}};var f=0;d.c()})();
