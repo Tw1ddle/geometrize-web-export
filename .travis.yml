@@ -24,6 +24,7 @@ branches:
 script:
   - haxelib install closure
   - haxelib install embed-js
+  - haxelib install threejs
   - haxe GeometrizeWebExport.hxml backend_all.hxml
 
 # Deploy the test configuration using Travis builtin GitHub Pages support
