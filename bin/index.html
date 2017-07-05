@@ -1,4 +1,50 @@
-TODO this will be a list of pages that host geometrized content, using different rendering backends
-
-backend_canvas
-backend_threejs
+<!DOCTYPE html>
+<html lang="en-GB" xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,user-scalable=yes,initial-scale=1,maximum-scale=1">
+		<title>Geometrize - geometrizing images into geometric primitives</title>
+		<meta name="author" content="Sam Twidale">
+		<meta name="description" content="Recreating images as animated geometric primitives.">
+		<meta name="keywords" content="geometrize, geometrizer, primitives, geometric, procedural, hillclimbing, art, shapes, geometry">
+		<meta name="subject" content="Geometrize Images">
+		<meta name="robots" content="index, follow">
+		<meta property="og:title" content="Geometrize Web Export Demo">
+		<meta property="og:description" content="Recreating images as animated geometric primitives.">
+		<meta property="og:site_name" content="Samcodes">
+		<meta name="twitter:title" content="Image Geometrizer">
+		<meta name="twitter:description" content="Recreating images as animated geometric primitives.">
+		<link rel="icon" type="image/x-icon" href="icon/favicon.png">
+		<link rel="apple-touch-icon-precomposed" type="image/x-icon" href="icon/apple-touch-icon-precomposed.png">
+		<!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="icon/favicon.ico"><![endif]-->
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+	</head>
+	
+	<body>
+		<section id="header">
+			<div class="inner">
+				<h1><strong>Geometrize</strong></h1>
+				<h2>Geometrizing images into geometric primitives</h2>
+				
+				<br/>
+				
+				<iframe src="html/basic_logo.html" id="basic_logo"></iframe>
+				
+				<br/>
+				
+				<p>This is a gallery that showcases <a href="https://github.com/Tw1ddle/geometrize-web-export" target="_blank">web export</a> functionality of <a href="http://www.geometrize.co.uk/" target="_blank">Geometrize</a>, an app for recreating images with geometric primitives. All the graphics you see on this page are rendered using hundreds of shapes that were automatically arranged to approximate images.</p>
+			</div>
+		</section>
+		
+		<div class="container stitched" id="backend_canvas">
+			<iframe src="html/backend_canvas.html"></iframe>
+		</div>
+		
+		<br/>
+		
+		<div class="container stitched" id="backend_threejs">
+			<iframe src="html/backend_threejs.html"></iframe>
+		</div>
+	</body>
+</html>

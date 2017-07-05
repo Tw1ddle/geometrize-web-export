@@ -1,11 +1,8 @@
 package src.reader;
 
-class ShapeData
-{
-
+class ShapeData {
 	public function new()
 	{
 		
 	}
-	
 }

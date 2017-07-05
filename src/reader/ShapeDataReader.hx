@@ -1,4 +1,5 @@
 package src.reader;
+
 import src.shape.ShapeTypes;
 
 class ShapeDataReader {
