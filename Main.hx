@@ -1,18 +1,28 @@
 package;
 
 import js.Browser;
+import src.reader.FileReader;
+import src.reader.ShapeJsonReader;
+import src.renderer.CanvasRenderer;
+import src.renderer.ThreeJsRenderer;
+import src.shape.Shape;
 
 /**
- * Code for rendering shapes using various backends
+ * Example code for displaying Geometrized shapes using different rendering backends
  * @author Sam Twidale (http://samcodes.co.uk/)
  */
 class Main {
-	private static inline var GEOMETRY_DATA_PLACEHOLDER:String = "::GEOMETRY_DATA_PLACEHOLDER::"; // The token that will be replaced by geometry data in the test/export process
-	private static inline var GEOMETRY_METADATA_PLACEHOLDER:String = "::GEOMETRY_METADATA_PLACEHOLDER::"; // The token that will be replaced by metadata about the exported data in the test/export process
-	
 	private static inline var WEBSITE_URL:String = "http://geometrize.co.uk/"; // Geometrize website URL
 	
-	private static inline var maxFps:Float = 30.0; // Render framerate cap
+	#if backend_canvas
+	private var renderer:CanvasRenderer = new CanvasRenderer();
+	#elseif backend_threejs
+	private var renderer:ThreeJsRenderer = new ThreeJsRenderer();
+	#else
+	#error "No renderer defined"
+	#end
+	
+	private var data = readShapeData();
 	
 	static private function __init__():Void {
 		#if backend_canvas
@@ -40,7 +50,7 @@ class Main {
 	 * Main update loop.
 	 */
 	private function animate():Void {
-		var nextFrameDelay = Std.int((1.0 / Main.maxFps) * 1000.0);
+		var nextFrameDelay = Std.int((1.0 / 30.0) * 1000.0); // Per-frame delay to avoid burning CPU
 		
 		step(50);
 		
@@ -50,6 +60,12 @@ class Main {
 	}
 	
 	private function step(dt:Float):Void {
-		
+		// TODO add profiling flag/option for measuring this
+		renderer.render(data);
+	}
+	
+	// TODO make demo target-dependent
+	private static function readShapeData():Array<Shape> {
+		return ShapeJsonReader.shapesFromJson(FileReader.readFileAsString("bin/assets/test.json"));
 	}
 }

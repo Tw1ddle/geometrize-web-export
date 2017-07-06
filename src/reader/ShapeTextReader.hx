@@ -1,8 +1,10 @@
 package src.reader;
 
+import src.shape.Shape;
 import src.shape.ShapeTypes;
 
-class ShapeDataReader {
+@:keep
+class ShapeTextReader {
 	public static function readShapeData(data:String):Array<Shape> {
 		var shapes = new Array<Shape>();
 		

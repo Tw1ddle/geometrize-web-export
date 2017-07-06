@@ -10,8 +10,8 @@ package src.shape;
 	var ELLIPSE = 8;
 	var ROTATED_ELLIPSE = 16;
 	var CIRCLE = 32;
-	var LINE = 64,
-	var QUADRATIC_BEZIER = 128,
-	var POLYLINE = 256,
+	var LINE = 64;
+	var QUADRATIC_BEZIER = 128;
+	var POLYLINE = 256;
 	var SHAPE_COUNT = 9;
 }
