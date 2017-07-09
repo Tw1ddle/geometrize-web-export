@@ -62,18 +62,6 @@ class Main {
 	public static var x = 0;
 	private function step(dt:Float):Void {
 		// TODO add profiling flag/option for measuring this
-		for (s in data) {
-			s.data[0] += cast Math.sin(x);
-			s.data[2] += cast Math.sin(x);
-			s.data[4] += cast Math.sin(x);
-			
-			s.data[1] += cast Math.cos(x);
-			s.data[3] += cast Math.cos(x);
-			s.data[5] += cast Math.cos(x);
-			
-			x++;
-		}
-		
 		renderer.render(data);
 	}
 	

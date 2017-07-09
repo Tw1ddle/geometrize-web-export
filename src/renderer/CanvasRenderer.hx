@@ -24,6 +24,8 @@ class CanvasRenderer {
 	}
 	
 	public function render(shapes:Array<Shape>) {
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		
 		for (shape in shapes) {
 			switch(shape.type) {
 				case ShapeTypes.RECTANGLE:
@@ -51,6 +53,8 @@ class CanvasRenderer {
 	}
 	
 	private inline function drawRectangle(s:Shape) {
+		ctx.fillStyle = colorToRgbaAttrib(s.color);
+		
 		ctx.fillRect(s.data[0], s.data[1], s.data[2] - s.data[0], s.data[3] - s.data[1]);
 	}
 	
@@ -86,9 +90,6 @@ class CanvasRenderer {
 	static var x:Float = 0;
 	private inline function drawRotatedEllipse(s:Shape) {
 		ctx.fillStyle = colorToRgbaAttrib(s.color);
-		
-		// TODO remove
-		s.data[4] += Math.ceil(1 * (1 / (s.data[0] + 1)));
 		
 		ctx.beginPath();
 		ctx.ellipse(s.data[0], s.data[1], s.data[2], s.data[3], s.data[4] * (Math.PI/180), 0, 360);
@@ -128,11 +129,12 @@ class CanvasRenderer {
 		var i:Int = 0;
 		while (i < s.data.length - 1) {
 			ctx.lineTo(s.data[i], s.data[i + 1]);
-			i++;
+			i += 2;
 		}
 		ctx.stroke();
 	}
 	
+	// NOTE this is a bit horrible, could maybe precreate these
 	private inline function colorToRgbaAttrib(color:Int):String {
 		return "rgba(" + ((color >> 24) & 0xFF) + "," + ((color >> 16) & 0xFF) + "," + ((color >> 8) & 0xFF) + "," + ((color & 0xFF) / 255) + ")";
 	}
