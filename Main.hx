@@ -3,9 +3,13 @@ package;
 import js.Browser;
 import src.reader.FileReader;
 import src.reader.ShapeJsonReader;
-import src.renderer.CanvasRenderer;
-import src.renderer.ThreeJsRenderer;
 import src.shape.Shape;
+
+#if backend_canvas
+import src.renderer.CanvasRenderer;
+#elseif backend_threejs
+import src.renderer.ThreeJsRenderer;
+#end
 
 /**
  * Example code for displaying Geometrized shapes using different rendering backends
@@ -23,16 +27,6 @@ class Main {
 	#end
 	
 	private var data = readShapeData();
-	
-	static private function __init__():Void {
-		#if backend_canvas
-		// No dependencies
-		#elseif backend_threejs
-		embed.Js.from('http://cdnjs.cloudflare.com/ajax/libs/three.js/83/three.min.js');
-		#else
-		#error "No backend defined. Make sure one of the backends is being targeted in the .hxml"
-		#end
-	}
 	
 	private static function main():Void {
 		var main = new Main();

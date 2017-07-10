@@ -1,7 +1,10 @@
+#if backend_canvas
+
 package src.renderer;
 
 import js.Browser;
 import js.html.CanvasElement;
+import js.html.DivElement;
 import js.html.CanvasRenderingContext2D;
 import src.shape.Shape;
 import src.shape.ShapeTypes;
@@ -16,11 +19,14 @@ class CanvasRenderer {
 	private var ctx:CanvasRenderingContext2D;
 	
 	public function new() {
-		canvas = cast Browser.window.document.getElementById("basic_logo"); // TODO make this less broken
+		var container:DivElement = cast Browser.window.document.getElementById("basic_logo_container"); // TODO make this less broken
+		canvas = Browser.window.document.createCanvasElement();
 		ctx = canvas.getContext2d();
 		
 		canvas.width  = 800;
 		canvas.height = 600; // TODO either get size from shapes, or size appropriately?
+		
+		container.appendChild(canvas);
 	}
 	
 	public function render(shapes:Array<Shape>) {
@@ -87,7 +93,6 @@ class CanvasRenderer {
 		ctx.fill();
 	}
 	
-	static var x:Float = 0;
 	private inline function drawRotatedEllipse(s:Shape) {
 		ctx.fillStyle = colorToRgbaAttrib(s.color);
 		
@@ -139,3 +144,5 @@ class CanvasRenderer {
 		return "rgba(" + ((color >> 24) & 0xFF) + "," + ((color >> 16) & 0xFF) + "," + ((color >> 8) & 0xFF) + "," + ((color & 0xFF) / 255) + ")";
 	}
 }
+
+#end

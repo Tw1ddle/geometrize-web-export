@@ -2,4 +2,6 @@
 
 -D backend_threejs
 
+--macro embed.Js.from('http://cdnjs.cloudflare.com/ajax/libs/three.js/83/three.min.js')
+
 -js bin/js/backend_threejs.js
