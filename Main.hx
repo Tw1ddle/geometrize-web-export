@@ -53,7 +53,6 @@ class Main {
 		}, nextFrameDelay);
 	}
 	
-	public static var x = 0;
 	private function step(dt:Float):Void {
 		// TODO add profiling flag/option for measuring this
 		renderer.render(data);
@@ -61,6 +60,6 @@ class Main {
 	
 	// TODO make demo target-dependent
 	private static function readShapeData():Array<Shape> {
-		return ShapeJsonReader.shapesFromJson(FileReader.readFileAsString("bin/assets/test.json"));
+		return ShapeJsonReader.shapesFromJson(FileReader.readFileAsString("bin/assets/test_triangles.json"));
 	}
 }

@@ -1,23 +1,23 @@
 #if backend_canvas
 
 package src.renderer;
-import src.shape.abstracts.Polyline;
-import src.shape.abstracts.QuadraticBezier;
-import src.shape.abstracts.Line;
-import src.shape.abstracts.Circle;
-import src.shape.abstracts.RotatedEllipse;
-import src.shape.abstracts.Ellipse;
-import src.shape.abstracts.Triangle;
-import src.shape.abstracts.RotatedRectangle;
-import src.shape.Rgba;
-import src.shape.abstracts.Rectangle;
 
 import js.Browser;
 import js.html.CanvasElement;
 import js.html.CanvasRenderingContext2D;
 import js.html.DivElement;
+import src.shape.Rgba;
 import src.shape.Shape;
 import src.shape.ShapeTypes;
+import src.shape.abstracts.Circle;
+import src.shape.abstracts.Ellipse;
+import src.shape.abstracts.Line;
+import src.shape.abstracts.Polyline;
+import src.shape.abstracts.QuadraticBezier;
+import src.shape.abstracts.Rectangle;
+import src.shape.abstracts.RotatedEllipse;
+import src.shape.abstracts.RotatedRectangle;
+import src.shape.abstracts.Triangle;
 
 /**
  * Code for rendering geometrized images with HTML5 Canvas.

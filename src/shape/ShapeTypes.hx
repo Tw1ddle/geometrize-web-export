@@ -2,6 +2,7 @@ package src.shape;
 
 /**
  * Type ids for shapes. Must match the ShapeTypes enum in the Geometrize library (see https://github.com/Tw1ddle/geometrize-lib or http://www.geometrize.co.uk/)
+ * @author Sam Twidale (http://samcodes.co.uk/)
  */
 @:enum abstract ShapeTypes(Int) from Int to Int {
 	var RECTANGLE = 1;

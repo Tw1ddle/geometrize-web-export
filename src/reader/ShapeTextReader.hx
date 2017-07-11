@@ -3,6 +3,10 @@ package src.reader;
 import src.shape.Shape;
 import src.shape.ShapeTypes;
 
+/**
+ * Reads text data that describes shapes and converts it into data structures for convenient access at runtime
+ * @author Sam Twidale (http://samcodes.co.uk/)
+ */
 @:keep
 class ShapeTextReader {
 	public static function readShapeData(data:String):Array<Shape> {
