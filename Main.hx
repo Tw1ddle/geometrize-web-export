@@ -60,6 +60,6 @@ class Main {
 	
 	// TODO make demo target-dependent
 	private static function readShapeData():Array<Shape> {
-		return ShapeJsonReader.shapesFromJson(FileReader.readFileAsString("bin/assets/test_triangles.json"));
+		return ShapeJsonReader.shapesFromJson(FileReader.readFileAsString("bin/assets/test_all_shapes.json"));
 	}
 }

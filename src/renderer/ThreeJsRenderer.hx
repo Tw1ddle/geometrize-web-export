@@ -51,6 +51,7 @@ class ThreeJsRenderer {
 		
 		renderer.setClearColor(0xFFFFFF, 1); // TODO
 		renderer.setSize(800, 600); // TODO make this less broken
+		renderer.sortObjects = false;
 		
 		container.appendChild(renderer.domElement);
 		
@@ -184,19 +185,19 @@ class ThreeJsRenderer {
 		var rgb:Int = color >> 8;
 		
 		if (color & 0xFF == 0xFF) {
-			return new MeshBasicMaterial({color:rgb, side:js.Three.DoubleSide});
+			return new MeshBasicMaterial({color:rgb, side:js.Three.DoubleSide, depthTest:false});
 		}
 		var opacity:Float = (color & 0xFF) / 255.0;
-		return new MeshBasicMaterial({color:rgb, transparent:true, opacity:opacity, side:js.Three.DoubleSide});
+		return new MeshBasicMaterial({color:rgb, transparent:true, opacity:opacity, side:js.Three.DoubleSide, depthTest:false});
 	}
 	private inline function makeLineMaterial(color:Int):LineBasicMaterial {
 		var rgb:Int = color >> 8;
 		
 		if (color & 0xFF == 0xFF) {
-			return new LineBasicMaterial({color:rgb});
+			return new LineBasicMaterial({color:rgb, depthTest:false});
 		}
 		var opacity:Float = (color & 0xFF) / 255.0;
-		return new LineBasicMaterial({color:rgb, transparent:true, opacity:opacity});
+		return new LineBasicMaterial({color:rgb, transparent:true, opacity:opacity, depthTest:false});
 	}
 	
 	private inline function makeMesh(geometry:Geometry, color:Int):Mesh {
