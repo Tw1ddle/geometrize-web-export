@@ -1,6 +1,8 @@
 #if backend_threejs
 
 package src.renderer;
+import src.shape.abstracts.Triangle;
+import src.shape.abstracts.Rectangle;
 
 import js.Browser;
 import js.html.DivElement;
@@ -14,6 +16,8 @@ import js.three.Scene;
 import js.three.WebGLRenderer;
 import src.shape.Shape;
 import src.shape.ShapeTypes;
+import js.three.Vector3;
+import js.three.Face3;
 
 /**
  * Code for rendering geometrized images with three.js.
@@ -46,23 +50,23 @@ class ThreeJsRenderer {
 		for (shape in shapes) {
 			switch(shape.type) {
 				case ShapeTypes.RECTANGLE:
-					drawRectangle(shape);
+					addRectangle(shape);
 				case ShapeTypes.ROTATED_RECTANGLE:
-					drawRotatedRectangle(shape);
+					addRotatedRectangle(shape);
 				case ShapeTypes.TRIANGLE:
-					drawTriangle(shape);
+					addTriangle(shape);
 				case ShapeTypes.ELLIPSE:
-					drawEllipse(shape);
+					addEllipse(shape);
 				case ShapeTypes.ROTATED_ELLIPSE:
-					drawRotatedEllipse(shape);
+					addRotatedEllipse(shape);
 				case ShapeTypes.CIRCLE:
-					drawCircle(shape);
+					addCircle(shape);
 				case ShapeTypes.LINE:
-					drawLine(shape);
+					addLine(shape);
 				case ShapeTypes.QUADRATIC_BEZIER:
-					drawQuadraticBezier(shape);
+					addQuadraticBezier(shape);
 				case ShapeTypes.POLYLINE:
-					drawPolyline(shape);
+					addPolyline(shape);
 				default:
 					throw "Encountered unsupported shape type";
 			}
@@ -73,42 +77,52 @@ class ThreeJsRenderer {
 		clearScene();
 	}
 	
-	private inline function drawRectangle(s:Shape) {
+	private inline function addRectangle(s:Shape) {
 		var geometry = new PlaneGeometry(s.data[2] - s.data[0], s.data[3] - s.data[1]);
 		var mesh = makeMesh(geometry, s.color);
 		mesh.position.set(s.data[0] + ((s.data[2] - s.data[0]) / 2), s.data[1] + ((s.data[3] - s.data[1]) / 2), 4.0);
 		meshes.add(mesh);
 	}
 	
-	private inline function drawRotatedRectangle(s:Shape) {
-		
+	private inline function addRotatedRectangle(s:Shape) {
+		var geometry = new PlaneGeometry(s.data[2] - s.data[0], s.data[3] - s.data[1]);
+		var mesh = makeMesh(geometry, s.color);
+		mesh.rotation.z = s.data[4] * 3.141 / 180.0;
+		mesh.position.set(s.data[0] + ((s.data[2] - s.data[0]) / 2), s.data[1] + ((s.data[3] - s.data[1]) / 2), 4.0);
+		meshes.add(mesh);
 	}
 	
-	private inline function drawTriangle(s:Shape) {
+	private inline function addTriangle(s:Shape) {
+		var geometry = new Geometry();
+		geometry.vertices.push(new Vector3(s.data[0], s.data[1], 0));
+		geometry.vertices.push(new Vector3(s.data[2], s.data[3], 0));
+		geometry.vertices.push(new Vector3(s.data[4], s.data[5], 0));
+		geometry.faces.push(new Face3(0, 1, 2));
+		var mesh = makeMesh(geometry, s.color);
+		meshes.add(mesh);
+	}
+	
+	private inline function addEllipse(s:Shape) {
 
 	}
 	
-	private inline function drawEllipse(s:Shape) {
+	private inline function addRotatedEllipse(s:Shape) {
 
 	}
 	
-	private inline function drawRotatedEllipse(s:Shape) {
+	private inline function addCircle(s:Shape) {
 
 	}
 	
-	private inline function drawCircle(s:Shape) {
+	private inline function addLine(s:Shape) {
 
 	}
 	
-	private inline function drawLine(s:Shape) {
+	private inline function addQuadraticBezier(s:Shape) {
 
 	}
 	
-	private inline function drawQuadraticBezier(s:Shape) {
-
-	}
-	
-	private inline function drawPolyline(s:Shape) {
+	private inline function addPolyline(s:Shape) {
 
 	}
 	

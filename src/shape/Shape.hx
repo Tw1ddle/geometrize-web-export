@@ -7,6 +7,6 @@ package src.shape;
 @:keep
 typedef Shape = {
 	var type:ShapeTypes; // Shape type id
-	var color:Int; // RGBA8888 color
+	var color:Rgba; // RGBA8888 color
 	var data:Array<Int>; // Geometry data, has a different structure per shape type
 }
