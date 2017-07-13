@@ -5,6 +5,7 @@ package src.renderer;
 import js.Browser;
 import js.html.DivElement;
 import js.three.CircleGeometry;
+import js.three.Color;
 import js.three.Face3;
 import js.three.Geometry;
 import js.three.Line;
@@ -41,29 +42,40 @@ import src.shape.abstracts.Triangle;
  */
 @:keep
 class ThreeJsRenderer {
+	var renderer:WebGLRenderer;
+	var scene:Scene;
 	var camera:OrthographicCamera;
-	var renderer:WebGLRenderer = new WebGLRenderer();
-	var scene:Scene = new Scene();
-	var shapes:Object3D = new Object3D();
+	var shapes:Object3D;
 	
-	public function new() {
-		var container:DivElement = cast Browser.window.document.getElementById("basic_logo_container"); // TODO make this less broken
+	public function new(containerId:String) {
+		var container:DivElement = cast Browser.window.document.getElementById(containerId);
 		
-		renderer.setClearColor(0xFFFFFF, 1); // TODO
+		renderer = new WebGLRenderer();
 		renderer.setSize(800, 600); // TODO make this less broken
 		renderer.sortObjects = false;
 		
 		container.appendChild(renderer.domElement);
 		
+		scene = new Scene();
+		scene.background = new Color(0xFFFFFF);
+		
 		camera = new OrthographicCamera(0, 800, 0, 600, 0, 1000);
 		camera.position.set(200, 100, 200);
 		camera.position.set(0, 0, 200);
 		camera.lookAt(scene.position);
+		
 		scene.add(camera);
+		
+		shapes = new Object3D();
+		
 		scene.add(shapes);
 	}
 	
 	public function render(shapes:Array<src.shape.Shape>) {
+		if (shapes.length == 0) {
+			return;
+		}
+		
 		for (shape in shapes) {
 			switch(shape.type) {
 				case ShapeTypes.RECTANGLE:
@@ -181,7 +193,7 @@ class ThreeJsRenderer {
 	}
 	
 	// Creates a material from an RGBA8888 color value
-	private inline function makeMaterial(color:Int):MeshBasicMaterial {
+	private static inline function makeMaterial(color:Int):MeshBasicMaterial {
 		var rgb:Int = color >> 8;
 		
 		if (color & 0xFF == 0xFF) {
@@ -190,7 +202,7 @@ class ThreeJsRenderer {
 		var opacity:Float = (color & 0xFF) / 255.0;
 		return new MeshBasicMaterial({color:rgb, transparent:true, opacity:opacity, side:js.Three.DoubleSide, depthTest:false});
 	}
-	private inline function makeLineMaterial(color:Int):LineBasicMaterial {
+	private static inline function makeLineMaterial(color:Int):LineBasicMaterial {
 		var rgb:Int = color >> 8;
 		
 		if (color & 0xFF == 0xFF) {
@@ -200,7 +212,7 @@ class ThreeJsRenderer {
 		return new LineBasicMaterial({color:rgb, transparent:true, opacity:opacity, depthTest:false});
 	}
 	
-	private inline function makeMesh(geometry:Geometry, color:Int):Mesh {
+	private static inline function makeMesh(geometry:Geometry, color:Int):Mesh {
 		return new Mesh(geometry, makeMaterial(color));
 	}
 }

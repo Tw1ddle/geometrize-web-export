@@ -28,8 +28,8 @@ class CanvasRenderer {
 	private var canvas:CanvasElement;
 	private var ctx:CanvasRenderingContext2D;
 	
-	public function new() {
-		var container:DivElement = cast Browser.window.document.getElementById("basic_logo_container"); // TODO make this less broken
+	public function new(containerId:String) {
+		var container:DivElement = cast Browser.window.document.getElementById(containerId);
 		canvas = Browser.window.document.createCanvasElement();
 		ctx = canvas.getContext2d();
 		
