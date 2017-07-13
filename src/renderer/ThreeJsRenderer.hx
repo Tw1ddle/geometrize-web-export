@@ -199,10 +199,10 @@ class ThreeJsRenderer {
 		var threeDoubleSide:Int = 2; // NOTE hackiness since generated threejs externs aren't working out of the box
 		
 		if (color & 0xFF == 0xFF) {
-			return new MeshBasicMaterial({color:rgb, side:threeDoubleSide, depthTest:false});
+			return new MeshBasicMaterial({color:rgb, side:cast threeDoubleSide, depthTest:false});
 		}
 		var opacity:Float = (color & 0xFF) / 255.0;
-		return new MeshBasicMaterial({color:rgb, transparent:true, opacity:opacity, side:threeDoubleSide, depthTest:false});
+		return new MeshBasicMaterial({color:rgb, transparent:true, opacity:opacity, side:cast threeDoubleSide, depthTest:false});
 	}
 	private static inline function makeLineMaterial(color:Int):LineBasicMaterial {
 		var rgb:Int = color >> 8;
