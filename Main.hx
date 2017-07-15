@@ -48,10 +48,11 @@ class GeometrizeWidget
 	public inline function new(shapes:Array<Shape>, attachmentPointId:String) {
 		this.shapes = shapes;
 		
+		// TODO should calculate intrinsic size from max extents of the shapes, or include that somewhere in the data
 		#if backend_canvas
-		renderer = new CanvasRenderer(attachmentPointId);
+		renderer = new CanvasRenderer(attachmentPointId, 683, 512);
 		#elseif backend_threejs
-		renderer = new ThreeJsRenderer(attachmentPointId);
+		renderer = new ThreeJsRenderer(attachmentPointId, 683, 512);
 		#end
 	}
 	

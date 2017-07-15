@@ -24,13 +24,16 @@ import src.shape.abstracts.Triangle;
  * @author Sam Twidale (http://samcodes.co.uk/)
  */
 @:keep
-class CanvasRenderer {
+class CanvasRenderer
+{
 	private var canvas:CanvasElement;
 	private var ctx:CanvasRenderingContext2D;
 	
-	public function new(containerId:String) {
+	public function new(containerId:String, intrinsicWidth:Int, intrinsicHeight:Int) {
 		var container:DivElement = cast Browser.window.document.getElementById(containerId);
 		canvas = Browser.window.document.createCanvasElement();
+		canvas.width = intrinsicWidth;
+		canvas.height = intrinsicHeight;
 		canvas.className = Renderer.GEOMETRIZE_CANVAS_TYPE_NAME;
 		ctx = canvas.getContext2d();
 		

@@ -41,16 +41,19 @@ import src.shape.abstracts.Triangle;
  * @author Sam Twidale (http://samcodes.co.uk/)
  */
 @:keep
-class ThreeJsRenderer {
+class ThreeJsRenderer
+{
 	var renderer:WebGLRenderer;
 	var scene:Scene;
 	var camera:OrthographicCamera;
 	var shapes:Object3D;
 	
-	public function new(containerId:String) {
+	public function new(containerId:String, intrinsicWidth:Int, intrinsicHeight:Int) {
 		var container:DivElement = cast Browser.window.document.getElementById(containerId);
 		
 		var canvas = Browser.window.document.createCanvasElement();
+		canvas.width = intrinsicWidth;
+		canvas.height = intrinsicHeight;
 		canvas.className = Renderer.GEOMETRIZE_CANVAS_TYPE_NAME;
 		
 		renderer = new WebGLRenderer({canvas:canvas});
@@ -61,7 +64,7 @@ class ThreeJsRenderer {
 		scene = new Scene();
 		scene.background = new Color(0xFFFFFF);
 		
-		camera = new OrthographicCamera(0, 800, 0, 600, 0, 1000);
+		camera = new OrthographicCamera(0, intrinsicWidth, 0, intrinsicHeight, 0, 1000);
 		camera.position.set(0, 0, 200);
 		camera.lookAt(scene.position);
 		

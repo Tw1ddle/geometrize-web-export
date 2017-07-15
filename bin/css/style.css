@@ -83,20 +83,22 @@ a:hover {
     margin: 15px;
 }
 
-#geometrize_widget {
+.geometrize_widget {
     border: 0;
     margin: 0;
     padding: 0;
-    width:100vw;
+    width:auto;
     height:100vh;
 }
-
-#geometrize_canvas {
+.geometrize_canvas {
     border: 0;
-    margin: 0;
     padding: 0;
-}
+    width:auto;
+    height:100vh;
 
+    display: block;
+    margin: 0 auto;
+}
 iframe {
     overflow:hidden;
 }
