@@ -15,7 +15,7 @@ import sys.FileSystem;
 using StringTools;
 
 /**
- * Reads shape data at compile time and embeds it in the program at compile time
+ * Reads JSON shape data and embeds it in the program at compile time
  * @author Sam Twidale (http://samcodes.co.uk/)
  */
 class ShapeEmbedder {

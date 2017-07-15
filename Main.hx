@@ -77,35 +77,6 @@ class Main
 	
 	private inline function new() {
 		createWidgets(Browser.document.documentElement);
-		
-		Browser.window.onload = onWindowLoaded;
-	}
-	
-	private inline function onWindowLoaded():Void {
-		animate();
-	}
-	
-	/**
-	 * Main update loop.
-	 */
-	private function animate():Void {
-		var nextFrameDelay = Std.int((1.0 / 30.0) * 1000.0); // Per-frame delay to avoid burning CPU
-		
-		update(50);
-		
-		Browser.window.setTimeout(function():Void {
-			this.animate();
-		}, nextFrameDelay);
-	}
-	
-	/**
-	 * Main update function
-	 * @param	dt Delta time since last update
-	 */
-	private inline function update(dt:Float):Void {
-		for (widget in widgets) {
-			widget.render(dt);
-		}
 	}
 	
 	/**
@@ -132,6 +103,15 @@ class Main
 	}
 	
 	/**
+	 * Adds a Geometrize widget, rendering it once
+	 * @param	widget The widget to add to the page
+	 */
+	private inline function addWidget(widget:GeometrizeWidget):Void {
+		widget.render(0);
+		widgets.push(widget);
+	}
+	
+	/**
 	 * Attempts to load JSON shape data from a source and create a widget from that data
 	 * @param	source The URL or file path to request shape data from
 	 * @param	attachmentPointId The id of the element to attach the widget to
@@ -142,7 +122,7 @@ class Main
 		var s:String = ShapeEmbedder.toVarName(path.file + "_" + path.ext);
 		if (Reflect.hasField(EmbeddedShapeData, s)) {
 			var shapes:Array<Shape> = Reflect.field(EmbeddedShapeData, s);
-			widgets.push(new GeometrizeWidget(shapes, attachmentPointId));
+			addWidget(new GeometrizeWidget(shapes, attachmentPointId));
 			return;
 		}
 		
@@ -150,7 +130,7 @@ class Main
 		requestData(source,
 		function(data:String) {
 			var shapes:Array<Shape> = ShapeJsonReader.shapesFromJson(data);
-			widgets.push(new GeometrizeWidget(shapes, attachmentPointId));
+			addWidget(new GeometrizeWidget(shapes, attachmentPointId));
 		},
 		function(error:String) {
 			trace(error);
