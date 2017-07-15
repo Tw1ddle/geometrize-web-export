@@ -31,10 +31,8 @@ class CanvasRenderer {
 	public function new(containerId:String) {
 		var container:DivElement = cast Browser.window.document.getElementById(containerId);
 		canvas = Browser.window.document.createCanvasElement();
+		canvas.className = Renderer.GEOMETRIZE_CANVAS_TYPE_NAME;
 		ctx = canvas.getContext2d();
-		
-		canvas.width  = 800;
-		canvas.height = 600; // TODO either get size from shapes, or size appropriately?
 		
 		container.appendChild(canvas);
 	}

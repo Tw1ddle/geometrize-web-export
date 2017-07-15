@@ -50,8 +50,10 @@ class ThreeJsRenderer {
 	public function new(containerId:String) {
 		var container:DivElement = cast Browser.window.document.getElementById(containerId);
 		
-		renderer = new WebGLRenderer();
-		renderer.setSize(800, 600); // TODO make this less broken
+		var canvas = Browser.window.document.createCanvasElement();
+		canvas.className = Renderer.GEOMETRIZE_CANVAS_TYPE_NAME;
+		
+		renderer = new WebGLRenderer({canvas:canvas});
 		renderer.sortObjects = false;
 		
 		container.appendChild(renderer.domElement);
@@ -60,7 +62,6 @@ class ThreeJsRenderer {
 		scene.background = new Color(0xFFFFFF);
 		
 		camera = new OrthographicCamera(0, 800, 0, 600, 0, 1000);
-		camera.position.set(200, 100, 200);
 		camera.position.set(0, 0, 200);
 		camera.lookAt(scene.position);
 		

@@ -1,6 +1,5 @@
 package src.reader;
 
-import haxe.io.Path;
 import haxe.macro.Context;
 import haxe.macro.Expr.Access.APublic;
 import haxe.macro.Expr.Access.AStatic;
