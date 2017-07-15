@@ -31,6 +31,7 @@ class ShapeJsonReader {
 			var g = Std.int(colorArr[1]) & 0xFF;
 			var b = Std.int(colorArr[2]) & 0xFF;
 			var a = Std.int(colorArr[3]) & 0xFF;
+			
 			var rgba:Int = (r << 24) + (g << 16) + (b << 8) + (a);
 			
 			shapes.push({ type: shapeData.type, color: rgba, data: shapeData.data });
