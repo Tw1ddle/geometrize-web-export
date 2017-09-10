@@ -1,0 +1,8 @@
+-lib threejs
+
+-D backend_threejs
+-D test_backend
+
+--macro embed.Js.from('http://cdnjs.cloudflare.com/ajax/libs/three.js/83/three.min.js')
+
+-js bin/js/backend_threejs_test.js

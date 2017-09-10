@@ -1,4 +1,8 @@
 --each
 backend_canvas.hxml
 --next
+backend_canvas_test.hxml
+--next
 backend_threejs.hxml
+--next
+backend_threejs_test.hxml

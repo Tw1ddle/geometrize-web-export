@@ -6,7 +6,10 @@ import js.Browser;
 import js.html.Element;
 import src.reader.ShapeEmbedder;
 import src.reader.ShapeJsonReader;
+
 import src.shape.Shape;
+import src.shape.ShapeTypes;
+import src.shape.abstracts.Rectangle;
 
 #if backend_canvas
 import src.renderer.CanvasRenderer;
@@ -16,7 +19,9 @@ import src.renderer.ThreeJsRenderer;
 
 using StringTools;
 
+#if test_backend
 @:build(src.reader.ShapeEmbedder.buildDirectory("bin/assets/"))
+#end
 @:keep
 class EmbeddedShapeData
 {
@@ -48,11 +53,22 @@ class GeometrizeWidget
 	public inline function new(shapes:Array<Shape>, attachmentPointId:String) {
 		this.shapes = shapes;
 		
-		// TODO should calculate intrinsic size from max extents of the shapes, or include that somewhere in the data
+		// NOTE should calculate intrinsic size from max extents of the shapes, or include that somewhere in the data
+		// For now require the first shape is the rectangular "background" and defines the size of the renderer window
+		var getSize = function(shape:Shape) {
+			if (shape.type != ShapeTypes.RECTANGLE) {
+				return { x : 0, y : 0 };
+			}
+			
+			var rect:Rectangle = cast shape.data;
+			return { x: (rect.x2 - rect.x1), y: (rect.y2 - rect.y1) };
+		};
+		var size = getSize(shapes[0]);
+		
 		#if backend_canvas
-		renderer = new CanvasRenderer(attachmentPointId, 683, 512);
+		renderer = new CanvasRenderer(attachmentPointId, size.x, size.y);
 		#elseif backend_threejs
-		renderer = new ThreeJsRenderer(attachmentPointId, 683, 512);
+		renderer = new ThreeJsRenderer(attachmentPointId, size.x, size.y);
 		#end
 	}
 	
@@ -69,6 +85,7 @@ class Main
 {
 	private static inline var WEBSITE_URL:String = "http://geometrize.co.uk/"; // Geometrize website URL
 	private static inline var SHAPE_DATA_SOURCE_TAG:String = "data-source";
+	private static inline var SHAPE_DATA_EMBEDDED_TAG:String = "data-embedded";
 	
 	private var widgets:Array<GeometrizeWidget> = [];
 	
@@ -88,18 +105,31 @@ class Main
 		var elements = root.getElementsByClassName(GeometrizeWidget.GEOMETRIZE_WIDGET_TYPE_NAME);
 		
 		for (element in elements) {
+			var dataEmbeddedElement = element.attributes.getNamedItem(SHAPE_DATA_EMBEDDED_TAG);
+			if (dataEmbeddedElement == null) {
+				continue;
+			}
+			
+			var data:String = dataEmbeddedElement.value;
+			if (data.length == 0) {
+				continue;
+			}
+			
+			loadShapeData(data, element.id);
+		}
+		
+		for (element in elements) {
 			var dataSourceElement = element.attributes.getNamedItem(SHAPE_DATA_SOURCE_TAG);
 			if (dataSourceElement == null) {
 				continue;
 			}
 			
 			var dataSource:String = dataSourceElement.value;
-			
 			if (dataSource.length == 0) {
 				continue;
 			}
 			
-			loadShapeData(dataSource, element.id);
+			loadShapeDataFromSource(dataSource, element.id);
 		}
 	}
 	
@@ -113,12 +143,22 @@ class Main
 	}
 	
 	/**
+	 * Attempts to load shape data directly from a string and creates a widget from that data.
+	 * @param	data The shape data
+	 * @param	attachmentPointId The id of the element to attach the widget to
+	 */
+	private inline function loadShapeData(data:String, attachmentPointId:String):Void {
+		var shapes:Array<Shape> = ShapeJsonReader.shapesFromJson(data);
+		addWidget(new GeometrizeWidget(shapes, attachmentPointId));
+	}
+	
+	/**
 	 * Attempts to load JSON shape data from a source and create a widget from that data
 	 * @param	source The URL or file path to request shape data from
 	 * @param	attachmentPointId The id of the element to attach the widget to
 	 */
-	private inline function loadShapeData(source:String, attachmentPointId:String):Void {
-		// If the data is embedded already
+	private inline function loadShapeDataFromSource(source:String, attachmentPointId:String):Void {
+		// If the data is embedded in the embedded shape data class
 		var path:Path = new Path(source);
 		var s:String = ShapeEmbedder.toVarName(path.file + "_" + path.ext);
 		if (Reflect.hasField(EmbeddedShapeData, s)) {

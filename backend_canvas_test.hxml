@@ -1,0 +1,4 @@
+-D backend_canvas
+-D test_backend
+
+-js bin/js/backend_canvas_test.js

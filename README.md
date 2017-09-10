@@ -7,7 +7,7 @@ Haxe code for exporting geometrized images to web formats. View the examples and
 
 Part of [Geometrize](http://www.geometrize.co.uk/), a tool for recreating images with geometric primitives.
 
-[![Geometrized Tomatoes, Oil and Pepper](https://github.com/Tw1ddle/geometrize-web-export/blob/master/screenshots/tomatoes_oil_and_pepper.jpg?raw=true "Geometrized tomatoes, oil and pepper, 500 ellipses")](http://www.geometrize.co.uk/)
+[![Geometrized Ruined Church](https://github.com/Tw1ddle/geometrize-web-export/blob/master/screenshots/ruined_church.png?raw=true "Geometrized ruined church, 400 rotated rectangles")](http://www.geometrize.co.uk/)
 
 ## Usage
 
