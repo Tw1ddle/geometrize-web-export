@@ -79,11 +79,11 @@ class GeometrizeWidget
 
 /**
  * Code for drawing Geometrized images using different rendering backends
- * @author Sam Twidale (http://samcodes.co.uk/)
+ * @author Sam Twidale (https://samcodes.co.uk/)
  */
 class Main
 {
-	private static inline var WEBSITE_URL:String = "http://geometrize.co.uk/"; // Geometrize website URL
+	private static inline var WEBSITE_URL:String = "https://geometrize.co.uk/"; // Geometrize website URL
 	private static inline var SHAPE_DATA_SOURCE_TAG:String = "data-source";
 	private static inline var SHAPE_DATA_EMBEDDED_TAG:String = "data-embedded";
 	

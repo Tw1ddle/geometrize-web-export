@@ -21,7 +21,7 @@ import src.shape.abstracts.Triangle;
 
 /**
  * Code for rendering geometrized images with HTML5 Canvas.
- * @author Sam Twidale (http://samcodes.co.uk/)
+ * @author Sam Twidale (https://samcodes.co.uk/)
  */
 @:keep
 class CanvasRenderer

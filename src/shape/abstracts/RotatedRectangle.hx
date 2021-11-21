@@ -2,7 +2,7 @@ package src.shape.abstracts;
 
 /**
  * Abstract for manipulating rotated rectangle data.
- * @author Sam Twidale (http://samcodes.co.uk/)
+ * @author Sam Twidale (https://samcodes.co.uk/)
  */
 abstract RotatedRectangle(Array<Int>) from Array<Int>
 {

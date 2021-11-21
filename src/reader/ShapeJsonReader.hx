@@ -5,7 +5,7 @@ import src.shape.Shape;
 
 /**
  * Reads JSON data that describes shapes and converts it into data structures for convenient access at runtime
- * @author Sam Twidale (http://samcodes.co.uk/)
+ * @author Sam Twidale (https://samcodes.co.uk/)
  */
  @:keep
 class ShapeJsonReader {
